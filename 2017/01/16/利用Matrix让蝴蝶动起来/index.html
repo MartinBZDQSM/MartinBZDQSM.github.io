@@ -14,7 +14,7 @@
   <meta name="description" content="有幸在鸿洋的一篇Android FoldingLayout 折叠布局 原理及实现（一）中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。先上图：项目地址，gif有点掉帧，完整效果直接把项目clone下来试试就行了。
 整体思路由三个部分组成：1.蝴蝶的绘制。2.折叠动画。3.细节抖动。
 下面大概描述一下实现过程：
-###蝴蝶的绘制蝴蝶的绘制使用的是sv">
+蝴蝶的绘制蝴蝶的绘制使用的是svg+图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用Matrix让蝴蝶动起来">
 <meta property="og:url" content="https://martinbzdqsm.github.io/2017/01/16/利用Matrix让蝴蝶动起来/index.html">
@@ -22,15 +22,15 @@
 <meta property="og:description" content="有幸在鸿洋的一篇Android FoldingLayout 折叠布局 原理及实现（一）中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。先上图：项目地址，gif有点掉帧，完整效果直接把项目clone下来试试就行了。
 整体思路由三个部分组成：1.蝴蝶的绘制。2.折叠动画。3.细节抖动。
 下面大概描述一下实现过程：
-###蝴蝶的绘制蝴蝶的绘制使用的是sv">
+蝴蝶的绘制蝴蝶的绘制使用的是svg+图">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2017-01-16T08:36:09.015Z">
+<meta property="og:updated_time" content="2017-01-16T09:05:38.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Matrix让蝴蝶动起来">
 <meta name="twitter:description" content="有幸在鸿洋的一篇Android FoldingLayout 折叠布局 原理及实现（一）中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。先上图：项目地址，gif有点掉帧，完整效果直接把项目clone下来试试就行了。
 整体思路由三个部分组成：1.蝴蝶的绘制。2.折叠动画。3.细节抖动。
 下面大概描述一下实现过程：
-###蝴蝶的绘制蝴蝶的绘制使用的是sv">
+蝴蝶的绘制蝴蝶的绘制使用的是svg+图">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip">
   
     <link rel="alternate" href="/atom.xml" title="Martin Blog" type="application/atom+xml">
@@ -106,6 +106,14 @@
 </header>
 
 
+  <div style="background:#fff;width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
 
 
   <div id="container">
@@ -139,10 +147,10 @@
         <p><strong>有幸在<a href="http://my.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋</a>的一篇<a href="http://blog.csdn.net/lmj623565791/article/details/44278417" target="_blank" rel="external">Android FoldingLayout 折叠布局 原理及实现（一）</a>中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。</strong><br>先上图：<br><img src="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip" alt="butterfly.gif"><br><strong><a href="https://github.com/MartinBZDQSM/ButterFly" target="_blank" rel="external">项目地址</a>，gif有点掉帧，完整效果直接把项目clone下来试试就行了。</strong></p>
 <p>整体思路由三个部分组成：<br>1.蝴蝶的绘制。<br>2.折叠动画。<br>3.细节抖动。</p>
 <p>下面大概描述一下实现过程：</p>
-<p>###蝴蝶的绘制<br>蝴蝶的绘制使用的是svg+图片融合PorterDuffXfermode，对 这并不是一张图片，也就是说蝴蝶上的花纹是可以随意变化的。<br>在布局中添加花纹代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;com.martin.butterfly.master.ButterFlyLoadView</div><div class="line">    android:id=&quot;@+id/mbutterfly_view&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    app:figure=&quot;@drawable/figure1&quot;</div><div class="line">    /&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="蝴蝶的绘制"><a href="#蝴蝶的绘制" class="headerlink" title="蝴蝶的绘制"></a>蝴蝶的绘制</h3><p>蝴蝶的绘制使用的是svg+图片融合PorterDuffXfermode，对 这并不是一张图片，也就是说蝴蝶上的花纹是可以随意变化的。<br>在布局中添加花纹代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;com.martin.butterfly.master.ButterFlyLoadView</div><div class="line">    android:id=&quot;@+id/mbutterfly_view&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    app:figure=&quot;@drawable/figure1&quot;</div><div class="line">    /&gt;</div></pre></td></tr></table></figure></p>
 <p>关于svg的转化我并没有使用常见的解析方式；而是使用的是<a href="https://github.com/StanKocken/SVG2Drawable" target="_blank" rel="external">SVG2Drawable</a>,去除了关于svg的解析过程，直接使用生成后的path代码。<br>在组件初始化的时候使用PorterDuffXfermode生成相关花纹的蝴蝶图片。</p>
-<p>###折叠动画<br>折叠的原理还是跟文章头部所说到的<a href="http://blog.csdn.net/lmj623565791/article/details/44278417" target="_blank" rel="external">Android FoldingLayout 折叠布局 原理及实现（一）</a>与其原理一致，主要判断好两支翅膀的矩形块与ToPoly的变化，这里不再复述了，如果需要了解该api的话可以去看看<a href="http://my.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋</a>的博客，我将这些变化都封装在ButterFlyDrawable中方便更改视图效果，并不仅仅使用在dialog之中。</p>
-<p>###细节抖动<br>如果仅仅是蝴蝶扇翅膀，我觉得不怎么生动，为此我还增加细节抖动，使蝴蝶扇动的更逼真点。</p>
+<h3 id="折叠动画"><a href="#折叠动画" class="headerlink" title="折叠动画"></a>折叠动画</h3><p>折叠的原理还是跟文章头部所说到的<a href="http://blog.csdn.net/lmj623565791/article/details/44278417" target="_blank" rel="external">Android FoldingLayout 折叠布局 原理及实现（一）</a>与其原理一致，主要判断好两支翅膀的矩形块与ToPoly的变化，这里不再复述了，如果需要了解该api的话可以去看看<a href="http://my.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋</a>的博客，我将这些变化都封装在ButterFlyDrawable中方便更改视图效果，并不仅仅使用在dialog之中。</p>
+<h3 id="细节抖动"><a href="#细节抖动" class="headerlink" title="细节抖动"></a>细节抖动</h3><p>如果仅仅是蝴蝶扇翅膀，我觉得不怎么生动，为此我还增加细节抖动，使蝴蝶扇动的更逼真点。</p>
 <p><strong>如果你喜欢这个动画的话，欢迎点赞和star我的<a href="https://github.com/MartinBZDQSM/ButterFly" target="_blank" rel="external">项目</a></strong></p>
 
       
@@ -214,7 +222,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav">无</ol>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#蝴蝶的绘制"><span class="nav-number">1.</span> <span class="nav-text">蝴蝶的绘制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#折叠动画"><span class="nav-number">2.</span> <span class="nav-text">折叠动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细节抖动"><span class="nav-number">3.</span> <span class="nav-text">细节抖动</span></a></li></ol>
     
     </div>
   </aside>
