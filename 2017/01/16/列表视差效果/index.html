@@ -21,7 +21,7 @@
 没">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-f24c5960f8c99e31.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-e059d9ba2319e44b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-01-16T10:24:06.538Z">
+<meta property="og:updated_time" content="2017-01-16T11:33:48.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="列表视差效果">
 <meta name="twitter:description" content="ParallaxScrollImageView 这个控件是做什么的呢？如标题 主要是用于ListView 和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如下图：
@@ -101,6 +101,14 @@
 </header>
 
 
+  <div style="background:#fff;width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
 
 
   <div id="container">
@@ -132,8 +140,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="ParallaxScrollImageView-这个控件是做什么的呢？如标题-主要是用于ListView-和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax-ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如下图："><a href="#ParallaxScrollImageView-这个控件是做什么的呢？如标题-主要是用于ListView-和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax-ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如下图：" class="headerlink" title="ParallaxScrollImageView 这个控件是做什么的呢？如标题 主要是用于ListView 和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如下图："></a><a href="https://github.com/MartinBZDQSM/ParallaxScrollImageView" target="_blank" rel="external">ParallaxScrollImageView</a> 这个控件是做什么的呢？如标题 主要是用于ListView 和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如下图：</h5><p><img src="http://upload-images.jianshu.io/upload_images/2510337-f24c5960f8c99e31.gif?imageMogr2/auto-orient/strip" alt="Parallax.gif"></p>
-<p><strong>没看出效果的,可以下载apk体验一下:  <a href="https://yunpan.cn/c6yFmtfD9cAyL" target="_blank" rel="external">https://yunpan.cn/c6yFmtfD9cAyL</a>  访问密码 469d</strong><br><a id="more"></a></p>
+<p><strong>没看出效果的,可以下载apk体验一下:  <a href="https://yunpan.cn/c6yFmtfD9cAyL" target="_blank" rel="external">https://yunpan.cn/c6yFmtfD9cAyL</a>  访问密码 469d</strong></p>
 <h2 id="实现流程："><a href="#实现流程：" class="headerlink" title="实现流程："></a>实现流程：</h2><h3 id="1-图片的偏移："><a href="#1-图片的偏移：" class="headerlink" title="1.图片的偏移："></a>1.图片的偏移：</h3><p>图片的偏移，采用的是Canvas的Matrix Translate操作，具体需要计算的参照物如图显示：</p>
+<a id="more"></a>
 <p><img src="http://upload-images.jianshu.io/upload_images/2510337-e059d9ba2319e44b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
 <p>通过提前设置好组件显示的宽高比来计算出‘图片显示区域’和’真实图片区域’的偏差值，再计算距离中线的距离来计算滑动距离，这样item在滚动时不同组件的高度与中线的距离不同，即产生落差。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">if</span> (orientation == Orientation.BOTTOM_TOP) &#123;</div><div class="line">  localMatrix.postTranslate(<span class="number">0.0F</span>, (-(targetDis / <span class="number">2</span>) - (((targetHeight - screenHeight / <span class="number">2</span>)) * targetDis) / screenHeight));</div><div class="line">&#125; <span class="keyword">else</span> &#123;  </div><div class="line">  localMatrix.postTranslate(<span class="number">0.0F</span>,(-(targetDis / <span class="number">2</span>) + (((targetHeight - screenHeight / <span class="number">2</span>)) * targetDis) / screenHeight));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
