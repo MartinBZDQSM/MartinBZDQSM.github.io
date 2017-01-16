@@ -3,21 +3,43 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Martin Blog</title>
+  <title>svg渐绘动画 | Martin Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="matrixandroidcanvassvg" />
   
   
   
-  <meta name="description" content="记录编程的点滴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Martin Blog">
-<meta property="og:url" content="https://martinbzdqsm.github.io/index.html">
+  
+  <meta name="description" content="先上图：
+点子来自于一次情人节的礼物思考，想着能不能不俗套的去送花发红包之类的，再加上妹子也是做技术的，所以就想着搞了一个这个。
+这个效果的原理是基于PathView的，可是PathView并不能满足我的需求，于是乎我就开始下手自己修改了。
+下面我会一边分析PathView的实现过程，一边描述我是如何修改的(GIF图很多小心流量)。如果你不想看的话项目地址在这https://github.com/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Svg渐绘动画">
+<meta property="og:url" content="https://martinbzdqsm.github.io/2017/01/16/Svg渐绘动画/index.html">
 <meta property="og:site_name" content="Martin Blog">
-<meta property="og:description" content="记录编程的点滴">
+<meta property="og:description" content="先上图：
+点子来自于一次情人节的礼物思考，想着能不能不俗套的去送花发红包之类的，再加上妹子也是做技术的，所以就想着搞了一个这个。
+这个效果的原理是基于PathView的，可是PathView并不能满足我的需求，于是乎我就开始下手自己修改了。
+下面我会一边分析PathView的实现过程，一边描述我是如何修改的(GIF图很多小心流量)。如果你不想看的话项目地址在这https://github.com/">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-239ae20eee991fb2.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-bef3ad4f675780c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-259388f9a97b0e48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-68f15dd9652d87a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-ef4de36d4de4292f.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-bf3af403df3f505b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-d1414a0cd9abb9cd.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-0e6025018e95b1d1.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-441047ef432479b0.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2017-01-16T08:12:03.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Martin Blog">
-<meta name="twitter:description" content="记录编程的点滴">
+<meta name="twitter:title" content="Svg渐绘动画">
+<meta name="twitter:description" content="先上图：
+点子来自于一次情人节的礼物思考，想着能不能不俗套的去送花发红包之类的，再加上妹子也是做技术的，所以就想着搞了一个这个。
+这个效果的原理是基于PathView的，可是PathView并不能满足我的需求，于是乎我就开始下手自己修改了。
+下面我会一边分析PathView的实现过程，一边描述我是如何修改的(GIF图很多小心流量)。如果你不想看的话项目地址在这https://github.com/">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2510337-239ae20eee991fb2.gif?imageMogr2/auto-orient/strip">
   
     <link rel="alternate" href="/atom.xml" title="Martin Blog" type="application/atom+xml">
   
@@ -48,7 +70,7 @@
 
 
 
-  <body>
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
   <header id="allheader" class="site-header" role="banner">
@@ -107,17 +129,15 @@
             
       <div id="content" class="outer">
         
-          <section id="main">
-  
-    <article id="post-Svg渐绘动画"  class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-Svg渐绘动画" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
       <header class="article-header">
         
   
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/01/16/Svg渐绘动画/">Svg渐绘动画</a>
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Svg渐绘动画
     </h1>
   
 
@@ -173,469 +193,59 @@
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matrix/">matrix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svg/">svg</a></li></ul>
 
       
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-利用Matrix让蝴蝶动起来"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
         
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/01/16/利用Matrix让蝴蝶动起来/">利用Matrix让蝴蝶动起来蝴蝶动起来</a>
-    </h1>
-  
+	<div id="comment">
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2017/01/16/Svg渐绘动画/" data-title="Svg渐绘动画" data-url="https://martinbzdqsm.github.io/2017/01/16/Svg渐绘动画/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"martinbzdqsm"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+	<link rel="stylesheet" href="/css/comment.css">
 
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/01/16/利用Matrix让蝴蝶动起来/" class="article-date">
-	  <time datetime="2017-01-16T07:53:35.000Z" itemprop="datePublished">一月 16, 2017</time>
-	</a>
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>有幸在<a href="http://my.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋</a>的一篇<a href="http://blog.csdn.net/lmj623565791/article/details/44278417" target="_blank" rel="external">Android FoldingLayout 折叠布局 原理及实现（一）</a>中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。</strong><br>先上图：<br><img src="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip" alt="butterfly.gif"><br><strong><a href="https://github.com/MartinBZDQSM/ButterFly" target="_blank" rel="external">项目地址</a>，gif有点掉帧，完整效果直接把项目clone下来试试就行了。</strong></p>
-<p>整体思路由三个部分组成：<br>1.蝴蝶的绘制。<br>2.折叠动画。<br>3.细节抖动。</p>
-<p>下面大概描述一下实现过程：</p>
-<p>###蝴蝶的绘制<br>蝴蝶的绘制使用的是svg+图片融合PorterDuffXfermode，对 这并不是一张图片，也就是说蝴蝶上的花纹是可以随意变化的。<br>在布局中添加花纹代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;com.martin.butterfly.master.ButterFlyLoadView</div><div class="line">    android:id=&quot;@+id/mbutterfly_view&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    app:figure=&quot;@drawable/figure1&quot;</div><div class="line">    /&gt;</div></pre></td></tr></table></figure></p>
-<p>关于svg的转化我并没有使用常见的解析方式；而是使用的是<a href="https://github.com/StanKocken/SVG2Drawable" target="_blank" rel="external">SVG2Drawable</a>,去除了关于svg的解析过程，直接使用生成后的path代码。<br>在组件初始化的时候使用PorterDuffXfermode生成相关花纹的蝴蝶图片。</p>
-<p>###折叠动画<br>折叠的原理还是跟文章头部所说到的<a href="http://blog.csdn.net/lmj623565791/article/details/44278417" target="_blank" rel="external">Android FoldingLayout 折叠布局 原理及实现（一）</a>与其原理一致，主要判断好两支翅膀的矩形块与ToPoly的变化，这里不再复述了，如果需要了解该api的话可以去看看<a href="http://my.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋</a>的博客，我将这些变化都封装在ButterFlyDrawable中方便更改视图效果，并不仅仅使用在dialog之中。</p>
-<p>###细节抖动<br>如果仅仅是蝴蝶扇翅膀，我觉得不怎么生动，为此我还增加细节抖动，使蝴蝶扇动的更逼真点。</p>
-<p><strong>如果你喜欢这个动画的话，欢迎点赞和star我的<a href="https://github.com/MartinBZDQSM/ButterFly" target="_blank" rel="external">项目</a></strong></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matrix/">matrix</a></li></ul>
 
       
     </footer>
   </div>
   
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-列表视差效果"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/01/16/列表视差效果/">列表视差效果</a>
-    </h1>
   
+    <a href="/2017/01/16/利用Matrix让蝴蝶动起来/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">利用Matrix让蝴蝶动起来蝴蝶动起来</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/01/16/列表视差效果/" class="article-date">
-	  <time datetime="2017-01-16T07:51:41.000Z" itemprop="datePublished">一月 16, 2017</time>
-	</a>
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#####<a href="https://github.com/MartinBZDQSM/ParallaxScrollImageView" target="_blank" rel="external">ParallaxScrollImageView</a> 这个控件是做什么的呢？如标题 主要是用于ListView 和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如下图：#####</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2510337-f24c5960f8c99e31.gif?imageMogr2/auto-orient/strip" alt="Parallax.gif"></p>
-<p><strong>没看出效果的,可以下载apk体验一下:  <a href="https://yunpan.cn/c6yFmtfD9cAyL" target="_blank" rel="external">https://yunpan.cn/c6yFmtfD9cAyL</a>  访问密码 469d</strong></p>
-<p>##实现流程：##</p>
-<p>###1.图片的偏移：<br>图片的偏移，采用的是Canvas的Matrix Translate操作，具体需要计算的参照物如图显示：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2510337-e059d9ba2319e44b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>通过提前设置好组件显示的宽高比来计算出‘图片显示区域’和’真实图片区域’的偏差值，再计算距离中线的距离来计算滑动距离，这样item在滚动时不同组件的高度与中线的距离不同，即产生落差。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">if</span> (orientation == Orientation.BOTTOM_TOP) &#123;</div><div class="line">  localMatrix.postTranslate(<span class="number">0.0F</span>, (-(targetDis / <span class="number">2</span>) - (((targetHeight - screenHeight / <span class="number">2</span>)) * targetDis) / screenHeight));</div><div class="line">&#125; <span class="keyword">else</span> &#123;  </div><div class="line">  localMatrix.postTranslate(<span class="number">0.0F</span>,(-(targetDis / <span class="number">2</span>) + (((targetHeight - screenHeight / <span class="number">2</span>)) * targetDis) / screenHeight));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>###2.视图的滚动/组件的刷新：<br>视图的滚动主要是依靠监听Listview 和RecyclerView的滑动事件做到的，因为组件无法知道自己在列表中什么时候会进行滑动，所以需要监听器进行通知，我在组件中写了一个公开方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doWork</span><span class="params">()</span> </span>&#123;  invalidate();&#125;</div></pre></td></tr></table></figure></p>
-<p>而监听器的方法与我们做滑动底部刷新的方法一致，主要是要知道当前在屏幕的的item的数量与坐标，listview 的很简单，这个在网上查一查就知道了。而RecyclerView中由于不同类型的LinearManage获取数量与坐标的方法也有不同，下面来举出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onScrolled(RecyclerView recyclerView, int dx, int dy) &#123;  </div><div class="line">  super.onScrolled(recyclerView, dx, dy);  </div><div class="line">  int firstVisibleItem = 0, visibleItemCount = 0;  </div><div class="line">  if (GridLayoutManager.class.isInstance(layoutManager)) &#123;   //格子</div><div class="line">     </div><div class="line">     firstVisibleItem = ((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();     </div><div class="line">     visibleItemCount = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition() - firstVisibleItem + 1; </div><div class="line"></div><div class="line">   &#125; else if (StaggeredGridLayoutManager.class.isInstance(layoutManager)) &#123;//瀑布流</div><div class="line"></div><div class="line">     StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;   </div><div class="line">     int[] firstVisibleItems = (staggeredGridLayoutManager).findFirstVisibleItemPositions(new int[staggeredGridLayoutManager.getSpanCount()]);   </div><div class="line">     int[] lastVisibleItems = (staggeredGridLayoutManager).findLastVisibleItemPositions(new int[staggeredGridLayoutManager.getSpanCount()]);     </div><div class="line">     visibleItemCount = getMaxPosition(lastVisibleItems) - getMinPosition(firstVisibleItems);  </div><div class="line"></div><div class="line">  &#125; else if (LinearLayoutManager.class.isInstance(layoutManager)) &#123; //线性       </div><div class="line"></div><div class="line">    firstVisibleItem = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();    </div><div class="line">    visibleItemCount = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition() - firstVisibleItem + 1; </div><div class="line"></div><div class="line">   &#125;  </div><div class="line">    for (int i = 0, count = visibleItemCount; i &lt; count; ++i) &#123;   </div><div class="line">     try &#123;           </div><div class="line">         ParallaxImageView currentImageView = (ParallaxImageView) recyclerView.getChildAt(i).findViewById(parallaxImageViewId);      </div><div class="line">         currentImageView.doWork();    //刷新组件   </div><div class="line">         &#125; catch (NullPointerException e) &#123;     </div><div class="line">   &#125;    </div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>##如何使用：##</p>
-<h3 id="1-添加库"><a href="#1-添加库" class="headerlink" title="1.添加库"></a>1.添加库</h3><p>Step 1. 在你工程的根build.gradle下面添加对仓库的描述:</p>
-<pre><code>allprojects {
-    repositories {
-        ...
-        maven { url &quot;https://jitpack.io&quot; }
-    }
-}
-</code></pre><p>Step 2. 添加描述</p>
-<pre><code>dependencies {
-        compile &apos;com.github.MartinBZDQSM:ParallaxScrollImageView:v1.0&apos;
-}
-</code></pre><p>   tips: If you already used the appcompat-v7 and recyclerview-v7 try this：</p>
-<pre><code>compile &apos;com.android.support:appcompat-v7:&apos; + SUPPORT_VERSION
-    compile &apos;com.android.support:recyclerview-v7:&apos; + SUPPORT_VERSION
-    compile(&apos;com.github.MartinBZDQSM:ParallaxScrollImageView:v1.0&apos;)
-    {
-exclude group: &apos;com.android.support&apos;, module: &apos;appcompat-v7&apos;
-    exclude group: &apos;com.android.support&apos;, module: &apos;recyclerview-v7&apos;
-}
-</code></pre><h3 id="2-如何用"><a href="#2-如何用" class="headerlink" title="2.如何用?"></a>2.如何用?</h3><h4 id="1-在布局文件中添加ParallaxImageView-并添加相关参数"><a href="#1-在布局文件中添加ParallaxImageView-并添加相关参数" class="headerlink" title="(1)在布局文件中添加ParallaxImageView 并添加相关参数:"></a>(1)在布局文件中添加ParallaxImageView 并添加相关参数:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;martinbzdqsm.com.parallaxscrollimageview_master.ParallaxImageView</div><div class="line">       xmlns:parallax=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">       android:id=<span class="string">"@+id/img"</span></div><div class="line">       android:layout_width=<span class="string">"match_parent"</span></div><div class="line">       android:layout_height=<span class="string">"wrap_content"</span></div><div class="line">       parallax:img_ratio=<span class="string">"0.6"</span>   </div><div class="line">       parallax:orientation=<span class="string">"bottom_top"</span></div><div class="line">       parallax:paralax_ratio=<span class="string">"0.2"</span> /&gt;</div></pre></td></tr></table></figure>
-<p>parallax:img_ratio ：图片预览时所呈现的高与实际宽度的比值</p>
-<p>parallax:paralax_ratio：图片预览时偏移距离与实际宽度的比值</p>
-<p>所以 img_ratio+paralax_ratio= height(实际高度)/width(实际宽度)</p>
-<p>parallax:orientation ：      TOP_BOTTOM,BOTTOM_TOP</p>
-<h3 id="2-添加滑动监控器"><a href="#2-添加滑动监控器" class="headerlink" title="(2)添加滑动监控器:"></a>(2)添加滑动监控器:</h3><pre><code> Listview ： 
-
-        parallaxListViewController = new ParallaxListViewController(R.id.img);
-            listView.setOnScrollListener(parallaxListViewController);
-
- Recylerview:
-             (GridLayoutManager,StaggeredGridLayoutManager,LinearLayoutManager) 
-             GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-             mParallaxRecyclerViewController = new ParallaxRecyclerViewController(gridLayoutManager, R.id.img);
-             mRecyclerView.setLayoutManager(gridLayoutManager);
-             mRecyclerView.addOnScrollListener(mParallaxRecyclerViewController);
-             mRecyclerView.setAdapter(recyclerViewAdapter);
-
-Tips: StaggeredGridLayoutManager 瀑布流与其他的用法稍微有点不同,如果有需要可以看下demo如何写的。
-</code></pre><p>#项目地址<br><a href="https://github.com/MartinBZDQSM/ParallaxScrollImageView#" target="_blank" rel="external">https://github.com/MartinBZDQSM/ParallaxScrollImageView#</a></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matrix/">matrix</a></li></ul>
-
-      
-    </footer>
-  </div>
   
 </article>
 
 <!-- Table of Contents -->
 
-  
-    <article id="post-图片线条化"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
     
+      <ol class="nav">无</ol>
     
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/01/16/图片线条化/">图片线条化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/01/16/图片线条化/" class="article-date">
-	  <time datetime="2017-01-16T07:49:08.000Z" itemprop="datePublished">一月 16, 2017</time>
-	</a>
-
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>###工具：<br>Photoshop</p>
-<p>###流程<br><strong>1.准备一张图片</strong><br><img src="http://upload-images.jianshu.io/upload_images/2510337-cb690cec62c2a190.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test.jpg"><br><strong>2.将原图ps成线条画：</strong><br>将图片在ps中打开，然后ctrl+j 复制一张图层，按住ctrl+shirft+u进行去色。然后选中去掉色的图层：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2510337-bf14980dacf5492e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>再按ctrl+j 复制一张图层，按住ctrl+i 进行反相</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2510337-94d0e3dfa64d9962.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>调整混合模式为颜色减淡，滤镜菜单下选择其他里的最小值滤镜，你自己把控下力度！<br><img src="http://upload-images.jianshu.io/upload_images/2510337-55c35816ee824f36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adobe/">adobe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ps/">ps</a></li></ul>
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-图像转svg"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/01/15/图像转svg/">图像转Svg</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/01/15/图像转svg/" class="article-date">
-	  <time datetime="2017-01-15T15:33:57.000Z" itemprop="datePublished">一月 15, 2017</time>
-	</a>
-
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>###工具：<br>Adobe Illustrator </p>
-<p>###流程<br>之前了解到的勾勒svg路径的工具可能用的比较多的都是GIMP 2,当我问到我司的美工大大的时候，他介绍我Adobe Illustrator 这个流弊哄哄的工具。使用起来超级简单：<br><strong>1.在AI中打开需要处理的图片（下方图只是演示，并不是叫你使用处理过的图，你随意就好了。），然后点击上方的图像临摹按钮：</strong><br><img src="http://upload-images.jianshu.io/upload_images/2510337-b69a631269a89e96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br><strong>2.调节右方属性中的阈值，调节到你想用的效果</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2510337-e21a4b07837c8804.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br><strong>然后点击上方的扩展按钮，并保存成svg，=</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2510337-8d2a482c8046b64c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adobe/">adobe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ps/">ps</a></li></ul>
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-
-
+  </aside>
 </section>
-          <aside id="sidebar">
-  
-    <div class="widget-wrap" style="margin: 20px 0;">
-	<div id="search-form-wrap">
-
-    <form class="search-form">
-        <label style="width: 75%;">
-            <span class="screen-reader-text">Search for:</span>
-            <input type="search" class="search-field" style="height: 42px;" placeholder=" 搜索…" value="" name="s" title="Search for:">
-        </label>
-        <input type="submit" class="search-form-submit" value="搜索">
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(无标题)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div>
-</div>
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">联系我们</h3>
-    <div class="widget widget_athemes_social_icons">
-
-    	<ul class="clearfix widget-social-icons">   
-    	
-   			<li><a href="https://github.com/MartinBZDQSM" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="http://weibo.com/1923637500" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href="null" title="Flickr"><i class="fa fa-flickr" aria-hidden="true"></i></a></li> 
-
-   		
-   		</ul>
-
-
-   		<!--
-   		<ul class="clearfix widget-social-icons">   		
-   		<li class="widget-si-twitter"><a href="http://twitter.com" title="Twitter"><i class="ico-twitter"></i></a></li> 
-		<li class="widget-si-facebook"><a href="http://facebook.com" title="Facebook"><i class="ico-facebook"></i></a></li>
-			<li class="widget-si-gplus"><a href="http://plus.google.com" title="Google+"><i class="ico-gplus"></i></a></li>
-			<li class="widget-si-pinterest"><a href="http://pinterest.com" title="Pinterest"><i class="ico-pinterest"></i></a></li>
-			<li class="widget-si-flickr"><a href="http://flickr.com" title="Flickr"><i class="ico-flickr"></i></a></li>
-			<li class="widget-si-instagram"><a href="http://instagram.com" title="Instagram"><i class="ico-instagram"></i></a></li>
-		</ul> -->
-
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget_athemes_tabs">
-    <ul id="widget-tab" class="clearfix widget-tab-nav">
-      <li class="active"><a>最新文章</a></li>
-    </ul>
-    <div class="widget">
-      <ul>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2017/01/16/Svg渐绘动画/">Svg渐绘动画</a></h6>
-              <span>一月 16, 2017</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2017/01/16/利用Matrix让蝴蝶动起来/">利用Matrix让蝴蝶动起来蝴蝶动起来</a></h6>
-              <span>一月 16, 2017</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2017/01/16/列表视差效果/">列表视差效果</a></h6>
-              <span>一月 16, 2017</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2017/01/16/图片线条化/">图片线条化</a></h6>
-              <span>一月 16, 2017</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2017/01/15/图像转svg/">图像转Svg</a></h6>
-              <span>一月 15, 2017</span>
-            </div>
-
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂七杂八/">杂七杂八</a><span class="category-list-count">2</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/adobe/">adobe</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matrix/">matrix</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ps/">ps</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/adobe/" style="font-size: 15px;">adobe</a> <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/canvas/" style="font-size: 20px;">canvas</a> <a href="/tags/matrix/" style="font-size: 20px;">matrix</a> <a href="/tags/ps/" style="font-size: 15px;">ps</a> <a href="/tags/svg/" style="font-size: 10px;">svg</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">5</span></li></ul>
-    </div>
-  </div>
-
-
-  
-</aside>
         
       </div>
       <footer id="footer" class="site-footer">

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>列表视差效果 | Martin Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="matrixandroidcanvas" />
+  
+  
+  
+  
+  <meta name="description" content="#####ParallaxScrollImageView 这个控件是做什么的呢？如标题 主要是用于ListView 和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="列表视差效果">
+<meta property="og:url" content="https://martinbzdqsm.github.io/2017/01/16/列表视差效果/index.html">
+<meta property="og:site_name" content="Martin Blog">
+<meta property="og:description" content="#####ParallaxScrollImageView 这个控件是做什么的呢？如标题 主要是用于ListView 和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-f24c5960f8c99e31.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-e059d9ba2319e44b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-01-16T08:13:59.874Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="列表视差效果">
+<meta name="twitter:description" content="#####ParallaxScrollImageView 这个控件是做什么的呢？如标题 主要是用于ListView 和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2510337-f24c5960f8c99e31.gif?imageMogr2/auto-orient/strip">
+  
+    <link rel="alternate" href="/atom.xml" title="Martin Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Martin Blog" rel="home"> Martin Blog </a>
+            
+          </h1>
+
+          
+            <div class="site-description">记录编程的点滴</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div style="background:#fff;width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-列表视差效果" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      列表视差效果
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/01/16/列表视差效果/" class="article-date">
+	  <time datetime="2017-01-16T07:51:41.000Z" itemprop="datePublished">一月 16, 2017</time>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#####<a href="https://github.com/MartinBZDQSM/ParallaxScrollImageView" target="_blank" rel="external">ParallaxScrollImageView</a> 这个控件是做什么的呢？如标题 主要是用于ListView 和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如下图：#####</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2510337-f24c5960f8c99e31.gif?imageMogr2/auto-orient/strip" alt="Parallax.gif"></p>
+<p><strong>没看出效果的,可以下载apk体验一下:  <a href="https://yunpan.cn/c6yFmtfD9cAyL" target="_blank" rel="external">https://yunpan.cn/c6yFmtfD9cAyL</a>  访问密码 469d</strong></p>
+<p>##实现流程：##</p>
+<p>###1.图片的偏移：<br>图片的偏移，采用的是Canvas的Matrix Translate操作，具体需要计算的参照物如图显示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2510337-e059d9ba2319e44b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>通过提前设置好组件显示的宽高比来计算出‘图片显示区域’和’真实图片区域’的偏差值，再计算距离中线的距离来计算滑动距离，这样item在滚动时不同组件的高度与中线的距离不同，即产生落差。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">if</span> (orientation == Orientation.BOTTOM_TOP) &#123;</div><div class="line">  localMatrix.postTranslate(<span class="number">0.0F</span>, (-(targetDis / <span class="number">2</span>) - (((targetHeight - screenHeight / <span class="number">2</span>)) * targetDis) / screenHeight));</div><div class="line">&#125; <span class="keyword">else</span> &#123;  </div><div class="line">  localMatrix.postTranslate(<span class="number">0.0F</span>,(-(targetDis / <span class="number">2</span>) + (((targetHeight - screenHeight / <span class="number">2</span>)) * targetDis) / screenHeight));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>###2.视图的滚动/组件的刷新：<br>视图的滚动主要是依靠监听Listview 和RecyclerView的滑动事件做到的，因为组件无法知道自己在列表中什么时候会进行滑动，所以需要监听器进行通知，我在组件中写了一个公开方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doWork</span><span class="params">()</span> </span>&#123;  invalidate();&#125;</div></pre></td></tr></table></figure></p>
+<p>而监听器的方法与我们做滑动底部刷新的方法一致，主要是要知道当前在屏幕的的item的数量与坐标，listview 的很简单，这个在网上查一查就知道了。而RecyclerView中由于不同类型的LinearManage获取数量与坐标的方法也有不同，下面来举出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onScrolled(RecyclerView recyclerView, int dx, int dy) &#123;  </div><div class="line">  super.onScrolled(recyclerView, dx, dy);  </div><div class="line">  int firstVisibleItem = 0, visibleItemCount = 0;  </div><div class="line">  if (GridLayoutManager.class.isInstance(layoutManager)) &#123;   //格子</div><div class="line">     </div><div class="line">     firstVisibleItem = ((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();     </div><div class="line">     visibleItemCount = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition() - firstVisibleItem + 1; </div><div class="line"></div><div class="line">   &#125; else if (StaggeredGridLayoutManager.class.isInstance(layoutManager)) &#123;//瀑布流</div><div class="line"></div><div class="line">     StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;   </div><div class="line">     int[] firstVisibleItems = (staggeredGridLayoutManager).findFirstVisibleItemPositions(new int[staggeredGridLayoutManager.getSpanCount()]);   </div><div class="line">     int[] lastVisibleItems = (staggeredGridLayoutManager).findLastVisibleItemPositions(new int[staggeredGridLayoutManager.getSpanCount()]);     </div><div class="line">     visibleItemCount = getMaxPosition(lastVisibleItems) - getMinPosition(firstVisibleItems);  </div><div class="line"></div><div class="line">  &#125; else if (LinearLayoutManager.class.isInstance(layoutManager)) &#123; //线性       </div><div class="line"></div><div class="line">    firstVisibleItem = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();    </div><div class="line">    visibleItemCount = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition() - firstVisibleItem + 1; </div><div class="line"></div><div class="line">   &#125;  </div><div class="line">    for (int i = 0, count = visibleItemCount; i &lt; count; ++i) &#123;   </div><div class="line">     try &#123;           </div><div class="line">         ParallaxImageView currentImageView = (ParallaxImageView) recyclerView.getChildAt(i).findViewById(parallaxImageViewId);      </div><div class="line">         currentImageView.doWork();    //刷新组件   </div><div class="line">         &#125; catch (NullPointerException e) &#123;     </div><div class="line">   &#125;    </div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>##如何使用：##</p>
+<h3 id="1-添加库"><a href="#1-添加库" class="headerlink" title="1.添加库"></a>1.添加库</h3><p>Step 1. 在你工程的根build.gradle下面添加对仓库的描述:</p>
+<pre><code>allprojects {
+    repositories {
+        ...
+        maven { url &quot;https://jitpack.io&quot; }
+    }
+}
+</code></pre><p>Step 2. 添加描述</p>
+<pre><code>dependencies {
+        compile &apos;com.github.MartinBZDQSM:ParallaxScrollImageView:v1.0&apos;
+}
+</code></pre><p>   tips: If you already used the appcompat-v7 and recyclerview-v7 try this：</p>
+<pre><code>compile &apos;com.android.support:appcompat-v7:&apos; + SUPPORT_VERSION
+    compile &apos;com.android.support:recyclerview-v7:&apos; + SUPPORT_VERSION
+    compile(&apos;com.github.MartinBZDQSM:ParallaxScrollImageView:v1.0&apos;)
+    {
+exclude group: &apos;com.android.support&apos;, module: &apos;appcompat-v7&apos;
+    exclude group: &apos;com.android.support&apos;, module: &apos;recyclerview-v7&apos;
+}
+</code></pre><h3 id="2-如何用"><a href="#2-如何用" class="headerlink" title="2.如何用?"></a>2.如何用?</h3><h4 id="1-在布局文件中添加ParallaxImageView-并添加相关参数"><a href="#1-在布局文件中添加ParallaxImageView-并添加相关参数" class="headerlink" title="(1)在布局文件中添加ParallaxImageView 并添加相关参数:"></a>(1)在布局文件中添加ParallaxImageView 并添加相关参数:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;martinbzdqsm.com.parallaxscrollimageview_master.ParallaxImageView</div><div class="line">       xmlns:parallax=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">       android:id=<span class="string">"@+id/img"</span></div><div class="line">       android:layout_width=<span class="string">"match_parent"</span></div><div class="line">       android:layout_height=<span class="string">"wrap_content"</span></div><div class="line">       parallax:img_ratio=<span class="string">"0.6"</span>   </div><div class="line">       parallax:orientation=<span class="string">"bottom_top"</span></div><div class="line">       parallax:paralax_ratio=<span class="string">"0.2"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>parallax:img_ratio ：图片预览时所呈现的高与实际宽度的比值</p>
+<p>parallax:paralax_ratio：图片预览时偏移距离与实际宽度的比值</p>
+<p>所以 img_ratio+paralax_ratio= height(实际高度)/width(实际宽度)</p>
+<p>parallax:orientation ：      TOP_BOTTOM,BOTTOM_TOP</p>
+<h3 id="2-添加滑动监控器"><a href="#2-添加滑动监控器" class="headerlink" title="(2)添加滑动监控器:"></a>(2)添加滑动监控器:</h3><pre><code> Listview ： 
+
+        parallaxListViewController = new ParallaxListViewController(R.id.img);
+            listView.setOnScrollListener(parallaxListViewController);
+
+ Recylerview:
+             (GridLayoutManager,StaggeredGridLayoutManager,LinearLayoutManager) 
+             GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+             mParallaxRecyclerViewController = new ParallaxRecyclerViewController(gridLayoutManager, R.id.img);
+             mRecyclerView.setLayoutManager(gridLayoutManager);
+             mRecyclerView.addOnScrollListener(mParallaxRecyclerViewController);
+             mRecyclerView.setAdapter(recyclerViewAdapter);
+
+Tips: StaggeredGridLayoutManager 瀑布流与其他的用法稍微有点不同,如果有需要可以看下demo如何写的。
+</code></pre><p>#项目地址<br><a href="https://github.com/MartinBZDQSM/ParallaxScrollImageView#" target="_blank" rel="external">https://github.com/MartinBZDQSM/ParallaxScrollImageView#</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matrix/">matrix</a></li></ul>
+
+      
+        
+	<div id="comment">
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2017/01/16/列表视差效果/" data-title="列表视差效果" data-url="https://martinbzdqsm.github.io/2017/01/16/列表视差效果/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"martinbzdqsm"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+	<link rel="stylesheet" href="/css/comment.css">
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/16/利用Matrix让蝴蝶动起来/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          利用Matrix让蝴蝶动起来蝴蝶动起来
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/16/图片线条化/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">图片线条化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-添加库"><span class="nav-number">1.</span> <span class="nav-text">1.添加库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-如何用"><span class="nav-number">2.</span> <span class="nav-text">2.如何用?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-在布局文件中添加ParallaxImageView-并添加相关参数"><span class="nav-number">2.1.</span> <span class="nav-text">(1)在布局文件中添加ParallaxImageView 并添加相关参数:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-添加滑动监控器"><span class="nav-number">3.</span> <span class="nav-text">(2)添加滑动监控器:</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Martin Blog All Rights Reserved.
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1261148219&web_id=1261148219" language="JavaScript"></script>
+  </div>
+
+
+</body>
+</html>

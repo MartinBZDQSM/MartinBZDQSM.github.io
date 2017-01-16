@@ -3,25 +3,35 @@
 <head>
   <meta charset="utf-8">
   
-  <title>hello world | Martin Blog</title>
+  <title>利用matrix让蝴蝶动起来蝴蝶动起来 | Martin Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="matrixandroidcanvas" />
   
   
   
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  
+  <meta name="description" content="有幸在鸿洋的一篇Android FoldingLayout 折叠布局 原理及实现（一）中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。先上图：项目地址，gif有点掉帧，完整效果直接把项目clone下来试试就行了。
+整体思路由三个部分组成：1.蝴蝶的绘制。2.折叠动画。3.细节抖动。
+下面大概描述一下实现过程：
+###蝴蝶的绘制蝴蝶的绘制使用的是sv">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://martinbzdqsm.github.io/2017/01/15/hello-world/index.html">
+<meta property="og:title" content="利用Matrix让蝴蝶动起来蝴蝶动起来">
+<meta property="og:url" content="https://martinbzdqsm.github.io/2017/01/16/利用Matrix让蝴蝶动起来/index.html">
 <meta property="og:site_name" content="Martin Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2017-01-15T07:15:11.684Z">
+<meta property="og:description" content="有幸在鸿洋的一篇Android FoldingLayout 折叠布局 原理及实现（一）中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。先上图：项目地址，gif有点掉帧，完整效果直接把项目clone下来试试就行了。
+整体思路由三个部分组成：1.蝴蝶的绘制。2.折叠动画。3.细节抖动。
+下面大概描述一下实现过程：
+###蝴蝶的绘制蝴蝶的绘制使用的是sv">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2017-01-16T08:10:07.470Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="利用Matrix让蝴蝶动起来蝴蝶动起来">
+<meta name="twitter:description" content="有幸在鸿洋的一篇Android FoldingLayout 折叠布局 原理及实现（一）中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。先上图：项目地址，gif有点掉帧，完整效果直接把项目clone下来试试就行了。
+整体思路由三个部分组成：1.蝴蝶的绘制。2.折叠动画。3.细节抖动。
+下面大概描述一下实现过程：
+###蝴蝶的绘制蝴蝶的绘制使用的是sv">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip">
   
     <link rel="alternate" href="/atom.xml" title="Martin Blog" type="application/atom+xml">
   
@@ -96,6 +106,14 @@ Quick">
 </header>
 
 
+  <div style="background:#fff;width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;">
+        <img width="100%" alt="Hike News" src="/css/images/pose.jpg">
+      </div>
+
+  </div>
+
 
 
   <div id="container">
@@ -103,7 +121,7 @@ Quick">
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-hello-world" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-利用Matrix让蝴蝶动起来" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -111,7 +129,7 @@ Quick">
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Hello World
+      利用Matrix让蝴蝶动起来蝴蝶动起来
     </h1>
   
 
@@ -119,34 +137,39 @@ Quick">
     
     <div class="article-meta">
       
-	Posted on <a href="/2017/01/15/hello-world/" class="article-date">
-	  <time datetime="2017-01-15T07:12:26.732Z" itemprop="datePublished">一月 15, 2017</time>
+	Posted on <a href="/2017/01/16/利用Matrix让蝴蝶动起来/" class="article-date">
+	  <time datetime="2017-01-16T07:53:35.000Z" itemprop="datePublished">一月 16, 2017</time>
 	</a>
 
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p><strong>有幸在<a href="http://my.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋</a>的一篇<a href="http://blog.csdn.net/lmj623565791/article/details/44278417" target="_blank" rel="external">Android FoldingLayout 折叠布局 原理及实现（一）</a>中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。</strong><br>先上图：<br><img src="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip" alt="butterfly.gif"><br><strong><a href="https://github.com/MartinBZDQSM/ButterFly" target="_blank" rel="external">项目地址</a>，gif有点掉帧，完整效果直接把项目clone下来试试就行了。</strong></p>
+<p>整体思路由三个部分组成：<br>1.蝴蝶的绘制。<br>2.折叠动画。<br>3.细节抖动。</p>
+<p>下面大概描述一下实现过程：</p>
+<p>###蝴蝶的绘制<br>蝴蝶的绘制使用的是svg+图片融合PorterDuffXfermode，对 这并不是一张图片，也就是说蝴蝶上的花纹是可以随意变化的。<br>在布局中添加花纹代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;com.martin.butterfly.master.ButterFlyLoadView</div><div class="line">    android:id=&quot;@+id/mbutterfly_view&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    app:figure=&quot;@drawable/figure1&quot;</div><div class="line">    /&gt;</div></pre></td></tr></table></figure></p>
+<p>关于svg的转化我并没有使用常见的解析方式；而是使用的是<a href="https://github.com/StanKocken/SVG2Drawable" target="_blank" rel="external">SVG2Drawable</a>,去除了关于svg的解析过程，直接使用生成后的path代码。<br>在组件初始化的时候使用PorterDuffXfermode生成相关花纹的蝴蝶图片。</p>
+<p>###折叠动画<br>折叠的原理还是跟文章头部所说到的<a href="http://blog.csdn.net/lmj623565791/article/details/44278417" target="_blank" rel="external">Android FoldingLayout 折叠布局 原理及实现（一）</a>与其原理一致，主要判断好两支翅膀的矩形块与ToPoly的变化，这里不再复述了，如果需要了解该api的话可以去看看<a href="http://my.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋</a>的博客，我将这些变化都封装在ButterFlyDrawable中方便更改视图效果，并不仅仅使用在dialog之中。</p>
+<p>###细节抖动<br>如果仅仅是蝴蝶扇翅膀，我觉得不怎么生动，为此我还增加细节抖动，使蝴蝶扇动的更逼真点。</p>
+<p><strong>如果你喜欢这个动画的话，欢迎点赞和star我的<a href="https://github.com/MartinBZDQSM/ButterFly" target="_blank" rel="external">项目</a></strong></p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+
       
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matrix/">matrix</a></li></ul>
+
       
         
 	<div id="comment">
 	
 	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/2017/01/15/hello-world/" data-title="Hello World" data-url="https://martinbzdqsm.github.io/2017/01/15/hello-world/"></div>
+	 <div class="ds-thread" data-thread-key="/2017/01/16/利用Matrix让蝴蝶动起来/" data-title="利用Matrix让蝴蝶动起来蝴蝶动起来" data-url="https://martinbzdqsm.github.io/2017/01/16/利用Matrix让蝴蝶动起来/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -173,15 +196,20 @@ Quick">
     
 <nav id="article-nav">
   
-    <a href="/2017/01/15/图像转svg/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/01/16/Svg渐绘动画/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
       <div class="article-nav-title">
         
-          Picture to svg
+          Svg渐绘动画
         
       </div>
     </a>
   
+  
+    <a href="/2017/01/16/列表视差效果/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">列表视差效果</div>
+    </a>
   
 </nav>
 
@@ -194,7 +222,7 @@ Quick">
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol>
+      <ol class="nav">无</ol>
     
     </div>
   </aside>
