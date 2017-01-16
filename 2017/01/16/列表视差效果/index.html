@@ -21,7 +21,7 @@
 没">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-f24c5960f8c99e31.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-e059d9ba2319e44b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-01-16T09:15:38.793Z">
+<meta property="og:updated_time" content="2017-01-16T09:26:46.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="列表视差效果">
 <meta name="twitter:description" content="ParallaxScrollImageView 这个控件是做什么的呢？如标题 主要是用于ListView 和RecyclerView中图片的滚动差效果。之前接到这个需求的时候，顺便到网上查了查，发现千篇一律的全是ListView头部的视图滚动差效果，我就想不明白了，他们怎么就取个名字叫做“Parallax ListView”了，加个“head”又不会怎么样，也只好自己动手了。具体的效果如下图：
@@ -155,18 +155,23 @@
 <p>parallax:paralax_ratio：图片预览时偏移距离与实际宽度的比值</p>
 <p>所以 img_ratio+paralax_ratio= height(实际高度)/width(实际宽度)</p>
 <p>parallax:orientation ：      TOP_BOTTOM,BOTTOM_TOP</p>
-<h3 id="2-添加滑动监控器"><a href="#2-添加滑动监控器" class="headerlink" title="(2)添加滑动监控器:"></a>(2)添加滑动监控器:</h3><pre><code>Listview ： 
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">parallaxListViewController = <span class="keyword">new</span> ParallaxListViewController(R.id.img);</div><div class="line">   listView.setOnScrollListener(parallaxListViewController);</div></pre></td></tr></table></figure>
-<pre><code>Recylerview:
-</code></pre><pre><code class="java">(GridLayoutManager,StaggeredGridLayoutManager,LinearLayoutManager) 
- GridLayoutManager gridLayoutManager = <span class="keyword">new</span> GridLayoutManager(<span class="keyword">this</span>,<span class="number">2</span>);
- mParallaxRecyclerViewController = <span class="keyword">new</span> ParallaxRecyclerViewController(gridLayoutManager, R.id.img);
- mRecyclerView.setLayoutManager(gridLayoutManager);
- mRecyclerView.addOnScrollListener(mParallaxRecyclerViewController);
- mRecyclerView.setAdapter(recyclerViewAdapter);
+<h3 id="2-添加滑动监控器"><a href="#2-添加滑动监控器" class="headerlink" title="(2)添加滑动监控器:"></a>(2)添加滑动监控器:</h3><pre><code class="java"> Listview ： 
+
+    parallaxListViewController = <span class="keyword">new</span> ParallaxListViewController(R.id.img);
+    listView.setOnScrollListener(parallaxListViewController);
+
+ Recylerview:
+
+   (GridLayoutManager,StaggeredGridLayoutManager,LinearLayoutManager) 
+    GridLayoutManager gridLayoutManager = <span class="keyword">new</span> GridLayoutManager(<span class="keyword">this</span>,<span class="number">2</span>);
+    mParallaxRecyclerViewController = <span class="keyword">new</span> ParallaxRecyclerViewController(gridLayoutManager, R.id.img);
+    mRecyclerView.setLayoutManager(gridLayoutManager);
+    mRecyclerView.addOnScrollListener(mParallaxRecyclerViewController);
+    mRecyclerView.setAdapter(recyclerViewAdapter);
+
+Tips: StaggeredGridLayoutManager 瀑布流与其他的用法稍微有点不同,如果有需要可以看下demo如何写的。
 </code></pre>
-<pre><code>Tips: StaggeredGridLayoutManager 瀑布流与其他的用法稍微有点不同,如果有需要可以看下demo如何写的。
-</code></pre><h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/MartinBZDQSM/ParallaxScrollImageView#" target="_blank" rel="external">https://github.com/MartinBZDQSM/ParallaxScrollImageView#</a></p>
+<h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/MartinBZDQSM/ParallaxScrollImageView#" target="_blank" rel="external">https://github.com/MartinBZDQSM/ParallaxScrollImageView#</a></p>
 
       
     </div>

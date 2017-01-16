@@ -269,18 +269,23 @@
 <p>parallax:paralax_ratio：图片预览时偏移距离与实际宽度的比值</p>
 <p>所以 img_ratio+paralax_ratio= height(实际高度)/width(实际宽度)</p>
 <p>parallax:orientation ：      TOP_BOTTOM,BOTTOM_TOP</p>
-<h3 id="2-添加滑动监控器"><a href="#2-添加滑动监控器" class="headerlink" title="(2)添加滑动监控器:"></a>(2)添加滑动监控器:</h3><pre><code>Listview ： 
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">parallaxListViewController = <span class="keyword">new</span> ParallaxListViewController(R.id.img);</div><div class="line">   listView.setOnScrollListener(parallaxListViewController);</div></pre></td></tr></table></figure>
-<pre><code>Recylerview:
-</code></pre><pre><code class="java">(GridLayoutManager,StaggeredGridLayoutManager,LinearLayoutManager) 
- GridLayoutManager gridLayoutManager = <span class="keyword">new</span> GridLayoutManager(<span class="keyword">this</span>,<span class="number">2</span>);
- mParallaxRecyclerViewController = <span class="keyword">new</span> ParallaxRecyclerViewController(gridLayoutManager, R.id.img);
- mRecyclerView.setLayoutManager(gridLayoutManager);
- mRecyclerView.addOnScrollListener(mParallaxRecyclerViewController);
- mRecyclerView.setAdapter(recyclerViewAdapter);
+<h3 id="2-添加滑动监控器"><a href="#2-添加滑动监控器" class="headerlink" title="(2)添加滑动监控器:"></a>(2)添加滑动监控器:</h3><pre><code class="java"> Listview ： 
+
+    parallaxListViewController = <span class="keyword">new</span> ParallaxListViewController(R.id.img);
+    listView.setOnScrollListener(parallaxListViewController);
+
+ Recylerview:
+
+   (GridLayoutManager,StaggeredGridLayoutManager,LinearLayoutManager) 
+    GridLayoutManager gridLayoutManager = <span class="keyword">new</span> GridLayoutManager(<span class="keyword">this</span>,<span class="number">2</span>);
+    mParallaxRecyclerViewController = <span class="keyword">new</span> ParallaxRecyclerViewController(gridLayoutManager, R.id.img);
+    mRecyclerView.setLayoutManager(gridLayoutManager);
+    mRecyclerView.addOnScrollListener(mParallaxRecyclerViewController);
+    mRecyclerView.setAdapter(recyclerViewAdapter);
+
+Tips: StaggeredGridLayoutManager 瀑布流与其他的用法稍微有点不同,如果有需要可以看下demo如何写的。
 </code></pre>
-<pre><code>Tips: StaggeredGridLayoutManager 瀑布流与其他的用法稍微有点不同,如果有需要可以看下demo如何写的。
-</code></pre><h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/MartinBZDQSM/ParallaxScrollImageView#" target="_blank" rel="external">https://github.com/MartinBZDQSM/ParallaxScrollImageView#</a></p>
+<h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/MartinBZDQSM/ParallaxScrollImageView#" target="_blank" rel="external">https://github.com/MartinBZDQSM/ParallaxScrollImageView#</a></p>
 
       
     </div>
