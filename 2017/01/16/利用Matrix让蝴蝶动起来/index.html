@@ -13,22 +13,25 @@
   
   <meta name="description" content="有幸在鸿洋的一篇Android FoldingLayout 折叠布局 原理及实现（一）中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。先上图：项目地址，gif有点掉帧，完整效果直接把项目clone下来试试就行了。
 整体思路由三个部分组成：1.蝴蝶的绘制。2.折叠动画。3.细节抖动。
-下面大概描述一下实现过程：">
+下面大概描述一下实现过程：
+蝴蝶的绘制蝴蝶的绘制使用的是svg+图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用Matrix让蝴蝶动起来">
 <meta property="og:url" content="https://martinbzdqsm.github.io/2017/01/16/利用Matrix让蝴蝶动起来/index.html">
 <meta property="og:site_name" content="Martin Blog">
 <meta property="og:description" content="有幸在鸿洋的一篇Android FoldingLayout 折叠布局 原理及实现（一）中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。先上图：项目地址，gif有点掉帧，完整效果直接把项目clone下来试试就行了。
 整体思路由三个部分组成：1.蝴蝶的绘制。2.折叠动画。3.细节抖动。
-下面大概描述一下实现过程：">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2017-01-16T10:46:31.674Z">
+下面大概描述一下实现过程：
+蝴蝶的绘制蝴蝶的绘制使用的是svg+图">
+<meta property="og:image" content="http://ojoa8hgnl.bkt.clouddn.com/android_蝴蝶.jpg">
+<meta property="og:updated_time" content="2017-01-16T12:55:10.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Matrix让蝴蝶动起来">
 <meta name="twitter:description" content="有幸在鸿洋的一篇Android FoldingLayout 折叠布局 原理及实现（一）中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。先上图：项目地址，gif有点掉帧，完整效果直接把项目clone下来试试就行了。
 整体思路由三个部分组成：1.蝴蝶的绘制。2.折叠动画。3.细节抖动。
-下面大概描述一下实现过程：">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip">
+下面大概描述一下实现过程：
+蝴蝶的绘制蝴蝶的绘制使用的是svg+图">
+<meta name="twitter:image" content="http://ojoa8hgnl.bkt.clouddn.com/android_蝴蝶.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Martin Blog" type="application/atom+xml">
   
@@ -113,6 +116,16 @@
           <section id="main" style="float:none;"><article id="post-利用Matrix让蝴蝶动起来" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="http://ojoa8hgnl.bkt.clouddn.com/android_蝴蝶.jpg" rel="gallery_ciy02epjd0009xcrj9sr1w6pt">
+        <img src="http://ojoa8hgnl.bkt.clouddn.com/android_蝴蝶.jpg" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
     
       <header class="article-header">
         
@@ -135,12 +148,11 @@
       
         <p><strong>有幸在<a href="http://my.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋</a>的一篇<a href="http://blog.csdn.net/lmj623565791/article/details/44278417" target="_blank" rel="external">Android FoldingLayout 折叠布局 原理及实现（一）</a>中，学习到了Matrix的setPolyToPoly操作，于是着想到了如何实现这样一个的动画效果。</strong><br>先上图：<br><img src="http://upload-images.jianshu.io/upload_images/2510337-2a413f58c4d33047.gif?imageMogr2/auto-orient/strip" alt="butterfly.gif"><br><strong><a href="https://github.com/MartinBZDQSM/ButterFly" target="_blank" rel="external">项目地址</a>，gif有点掉帧，完整效果直接把项目clone下来试试就行了。</strong></p>
 <p>整体思路由三个部分组成：<br>1.蝴蝶的绘制。<br>2.折叠动画。<br>3.细节抖动。</p>
-<p>下面大概描述一下实现过程：<br><a id="more"></a></p>
+<p>下面大概描述一下实现过程：</p>
 <h3 id="蝴蝶的绘制"><a href="#蝴蝶的绘制" class="headerlink" title="蝴蝶的绘制"></a>蝴蝶的绘制</h3><p>蝴蝶的绘制使用的是svg+图片融合PorterDuffXfermode，对 这并不是一张图片，也就是说蝴蝶上的花纹是可以随意变化的。<br>在布局中添加花纹代码如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.martin.butterfly.master.ButterFlyLoadView</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/mbutterfly_view"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">app:figure</span>=<span class="string">"@drawable/figure1"</span></div><div class="line">    /&gt;</div></pre></td></tr></table></figure></p>
 <p>关于svg的转化我并没有使用常见的解析方式；而是使用的是<a href="https://github.com/StanKocken/SVG2Drawable" target="_blank" rel="external">SVG2Drawable</a>,去除了关于svg的解析过程，直接使用生成后的path代码。<br>在组件初始化的时候使用PorterDuffXfermode生成相关花纹的蝴蝶图片。</p>
 <h3 id="折叠动画"><a href="#折叠动画" class="headerlink" title="折叠动画"></a>折叠动画</h3><p>折叠的原理还是跟文章头部所说到的<a href="http://blog.csdn.net/lmj623565791/article/details/44278417" target="_blank" rel="external">Android FoldingLayout 折叠布局 原理及实现（一）</a>与其原理一致，主要判断好两支翅膀的矩形块与ToPoly的变化，这里不再复述了，如果需要了解该api的话可以去看看<a href="http://my.csdn.net/lmj623565791" target="_blank" rel="external">鸿洋</a>的博客，我将这些变化都封装在ButterFlyDrawable中方便更改视图效果，并不仅仅使用在dialog之中。</p>
-<h3 id="细节抖动"><a href="#细节抖动" class="headerlink" title="细节抖动"></a>细节抖动</h3><p>如果仅仅是蝴蝶扇翅膀，我觉得不怎么生动，为此我还增加细节抖动，使蝴蝶扇动的更逼真点。</p>
-<p><strong>如果你喜欢这个动画的话，欢迎点赞和star我的<a href="https://github.com/MartinBZDQSM/ButterFly" target="_blank" rel="external">项目</a></strong></p>
+<h3 id="细节抖动"><a href="#细节抖动" class="headerlink" title="细节抖动"></a>细节抖动</h3><p>如果仅仅是蝴蝶扇翅膀，我觉得不怎么生动，为此我还增加细节抖动，使蝴蝶扇动的更逼真点。<br><a id="more"></a><br><strong>如果你喜欢这个动画的话，欢迎点赞和star我的<a href="https://github.com/MartinBZDQSM/ButterFly" target="_blank" rel="external">项目</a></strong></p>
 
       
     </div>
@@ -184,6 +196,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2017/01/16/Svg渐绘动画/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Svg渐绘动画
+        
+      </div>
+    </a>
   
   
     <a href="/2017/01/16/列表视差效果/" id="article-nav-older" class="article-nav-link-wrap">
