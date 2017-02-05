@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>kotlin学习笔记(一) | Martin&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="androidkotlin" />
+  
+  
+  
+  
+  <meta name="description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers
+
+环境配置：插件安装打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。
+
+Gradle配置修改父build.gradle：
+其中kotlin版本号根据这个kotlin地址进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kotlin学习笔记(一)">
+<meta property="og:url" content="https://martinbzdqsm.github.io/2017/02/04/Kotlin学习笔记(一)/index.html">
+<meta property="og:site_name" content="Martin's Blog">
+<meta property="og:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers
+
+环境配置：插件安装打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。
+
+Gradle配置修改父build.gradle：
+其中kotlin版本号根据这个kotlin地址进">
+<meta property="og:image" content="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png">
+<meta property="og:updated_time" content="2017-02-05T12:35:09.413Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kotlin学习笔记(一)">
+<meta name="twitter:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers
+
+环境配置：插件安装打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。
+
+Gradle配置修改父build.gradle：
+其中kotlin版本号根据这个kotlin地址进">
+<meta name="twitter:image" content="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Martin&#39;s Blog" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Martin&#39;s Blog" rel="home"> Martin&#39;s Blog </a>
+            
+          </h1>
+
+          
+            <div class="site-description">记录编程的点滴</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">分类</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">标签</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Kotlin学习笔记(一)" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+<div class="article-gallery">
+  <div class="article-gallery-photos">
+    
+      <a class="article-gallery-img fancybox" href="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" rel="gallery_ciyrcwik00000swrjtwxxgwr2">
+        <img src="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" itemprop="image">
+      </a>
+    
+  </div>
+</div>
+
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Kotlin学习笔记(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/02/04/Kotlin学习笔记(一)/" class="article-date">
+	  <time datetime="2017-02-04T10:34:13.000Z" itemprop="datePublished">二月 4, 2017</time>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文只是作者学习笔记，如果想学习kotlin的朋友建议去看<a href="https://www.gitbook.com/book/wangjiegulu/kotlin-for-android-developers-zh/details" title="kotlin-for-android-developers-zh" target="_blank" rel="external">Kotlin for android developers</a></p>
+</blockquote>
+<h2 id="环境配置："><a href="#环境配置：" class="headerlink" title="环境配置："></a>环境配置：</h2><h3 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h3><p>打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。</p>
+<p><img src="http://ojoa8hgnl.bkt.clouddn.com/kotlin_%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85.png" alt="插件安装"></p>
+<h3 id="Gradle配置"><a href="#Gradle配置" class="headerlink" title="Gradle配置"></a>Gradle配置</h3><p>修改父build.gradle：</p>
+<p>其中kotlin版本号根据这个<a href="http://kotlinlang.org/" title="http://kotlinlang.org/" target="_blank" rel="external">kotlin地址</a>进行修改</p>
+<p>anko的版本则看<a href="https://github.com/Kotlin/anko" title="https://github.com/Kotlin/anko" target="_blank" rel="external">anko</a></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">buildscript</span> &#123;</div><div class="line">    ext.support_version = <span class="string">'*.*.*'</span></div><div class="line">    ext.kotlin_version = <span class="string">'*.*.*'</span></div><div class="line">    ext.anko_version = <span class="string">'*.*.*'</span></div><div class="line">    <span class="keyword">repositories</span> &#123;</div><div class="line">        jcenter()</div><div class="line">        <span class="keyword">dependencies</span> &#123;</div><div class="line">            <span class="keyword">classpath</span> <span class="string">'com.android.tools.build:gradle:1.5.0'</span></div><div class="line">            <span class="keyword">classpath</span> <span class="string">"org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">allprojects</span> &#123;</div><div class="line">    <span class="keyword">repositories</span> &#123;</div><div class="line">        jcenter() </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>子Gradle配置：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">apply plugin: <span class="string">'com.android.application'</span></div><div class="line">apply plugin: <span class="string">'kotlin-android'</span></div><div class="line">apply plugin: <span class="string">'kotlin-android-extensions'</span></div><div class="line">android &#123;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">    <span class="keyword">compile</span> <span class="string">"com.android.support:appcompat-v7:$support_version"</span></div><div class="line">    <span class="keyword">compile</span> <span class="string">"org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"</span></div><div class="line">    <span class="keyword">compile</span> <span class="string">"org.jetbrains.anko:anko-common:$anko_version"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">buildscript</span> &#123;</div><div class="line">    <span class="keyword">repositories</span> &#123;</div><div class="line">jcenter() &#125;</div><div class="line">    <span class="keyword">dependencies</span> &#123;</div><div class="line">      <span class="keyword">classpath</span> <span class="string">"org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"</span></div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><blockquote>
+<p>在kotlin中没有java中的原始基本类型，一切都是对象。</p>
+</blockquote>
+<ul>
+<li>基本类型例如：int ，float ，double依然存在但是都是作为对象。</li>
+</ul>
+<ul>
+<li><p>数字类型不会自动转型，需要明确的类型转换：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i:<span class="built_in">Int</span>=<span class="number">7</span></div><div class="line"><span class="keyword">var</span> d:<span class="built_in">Double</span>=i.toDouble()</div><div class="line"></div><div class="line"><span class="keyword">var</span> c:<span class="built_in">Char</span>=<span class="string">'c'</span></div><div class="line"><span class="keyword">var</span> i:<span class="built_in">Int</span>=c.toInt()</div></pre></td></tr></table></figure>
+</li>
+<li><p>位运算使用<strong>and</strong>和<strong>or</strong>来代替 <strong>|</strong> 和 <strong>&amp;</strong></p>
+</li>
+</ul>
+<ul>
+<li>String类型可以像数组一样访问：<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> s = <span class="string">"Martin"</span></div><div class="line"><span class="keyword">val</span> c = s[<span class="number">2</span>] <span class="comment">//则c为"a"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
+<li>可变变量 <strong>var</strong></li>
+<li>不可变变量 <strong>val</strong>（和final一致）</li>
+</ul>
+<h2 id="类与函数："><a href="#类与函数：" class="headerlink" title="类与函数："></a>类与函数：</h2><h3 id="类继承和构造方法"><a href="#类继承和构造方法" class="headerlink" title="类继承和构造方法:"></a>类继承和构造方法:</h3><p>默认任何类都是基础继承自Any（类似object），所有类默认都是不可继承的即final，只能继承<strong>open</strong>或者<strong>abstract</strong>的类。</p>
+<p> 类有一个默认唯一的的构造器 init，其参数在<strong>类名</strong>后面添加即可：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Father</span></span>(name: String, surname: String) &#123;</div><div class="line">    init &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span></span>(name: String, surname: String) : Father(name, surname) &#123;</div><div class="line">    init &#123;</div><div class="line">        name?.toString() <span class="comment">//这里拿得到构造参数</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="类的属性"><a href="#类的属性" class="headerlink" title="类的属性"></a>类的属性</h3><p>自定类会默认使用getter和setter，你也可以使用field这个预留字段来进行访问：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: String = <span class="string">""</span></div><div class="line">        <span class="keyword">get</span>() = field.toUpperCase()<span class="comment">//toUpperCase使字符全部大写</span></div><div class="line">        <span class="keyword">set</span>(value) &#123;</div><div class="line">            field = <span class="string">"Name: <span class="subst">$value</span>"</span></div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> customer: Person = Person()</div><div class="line">    println(customer.name)   <span class="comment">// ABC</span></div><div class="line">    customer.name = <span class="string">"aaa"</span></div><div class="line">    println(customer.name)   <span class="comment">//NAME: AAA</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>点击查看field的属性时会发现显示如下图：</p>
+<p><img src="http://ojoa8hgnl.bkt.clouddn.com/kotlin1.png" alt="问题"></p>
+<p>咦！！既然是final var <strong>name</strong>！！final var那不等同于val？还能这样赋值！<br>那不等同于下面这段代码么？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">int</span> b = <span class="number">9</span>;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> a = b;</div><div class="line">    b = <span class="number">10</span>;</div><div class="line">`</div></pre></td></tr></table></figure></p>
+<p>于是我仔细看了<a href="https://www.gitbook.com/book/wangjiegulu/kotlin-for-android-developers-zh/details" title="kotlin-for-android-developers-zh" target="_blank" rel="external">Kotlin for android developers</a>的解释之后大概明白了，field只会使用该属性的getter与setter，而不是直接操作该属性且仅有属性访问器内部才有能力进行修改 ，这样就讲得过去了，，那么实际java代码应该是这样子的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">String name = <span class="string">"Martin"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> String field = name;</div><div class="line">    <span class="keyword">return</span> field.toUpperCase();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> String field = (<span class="string">"Name:"</span> + name);</div><div class="line">    <span class="keyword">this</span>.name = field;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="函数和函数参数"><a href="#函数和函数参数" class="headerlink" title="函数和函数参数"></a>函数和函数参数</h3><p>函数注意下基本的写法就好了,<br>普通写法：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">add</span><span class="params">(a: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</div><div class="line">     <span class="keyword">return</span> a + b</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>简约写法：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">add</span><span class="params">(a: <span class="type">Int</span>, b: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> = a + b</div></pre></td></tr></table></figure></p>
+<p>函数参数可以指定一个默认值，这样在函数使用的时候可以不用考虑传值，这样可以避免你需要重载的函数<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">test</span><span class="params">()</span></span> &#123;</div><div class="line">       Log.i(<span class="string">"OverLoadTest"</span>, add(<span class="number">1</span>, <span class="number">2</span>).toString())</div><div class="line">       Log.i(<span class="string">"OverLoadTest"</span>, add(<span class="number">1</span>).toString())</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">fun</span> <span class="title">add</span><span class="params">(a: <span class="type">Int</span>, b: <span class="type">Int</span> = <span class="number">2</span>)</span></span>: <span class="built_in">Int</span> = a + b</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+
+      
+        
+	<div id="comment">
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2017/02/04/Kotlin学习笔记(一)/" data-title="Kotlin学习笔记(一)" data-url="https://martinbzdqsm.github.io/2017/02/04/Kotlin学习笔记(一)/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"martinbzdqsm"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+	<link rel="stylesheet" href="/css/comment.css">
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/16/Svg渐绘动画/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Svg渐绘动画</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置："><span class="nav-number">1.</span> <span class="nav-text">环境配置：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插件安装"><span class="nav-number">1.1.</span> <span class="nav-text">插件安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle配置"><span class="nav-number">1.2.</span> <span class="nav-text">Gradle配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本类型"><span class="nav-number">2.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类与函数："><span class="nav-number">4.</span> <span class="nav-text">类与函数：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类继承和构造方法"><span class="nav-number">4.1.</span> <span class="nav-text">类继承和构造方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的属性"><span class="nav-number">4.2.</span> <span class="nav-text">类的属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数和函数参数"><span class="nav-number">4.3.</span> <span class="nav-text">函数和函数参数</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2017 Martin&#39;s Blog All Rights Reserved.
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1261148219&web_id=1261148219" language="JavaScript"></script>
+  </div>
+
+
+</body>
+</html>
