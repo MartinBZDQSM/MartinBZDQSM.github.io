@@ -11,23 +11,19 @@
   
   
   
-  <meta name="description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。
-
-数据类基本写法它可以让你避免创建Java中的用于保存状态但又操作非常简单的POJO的模版代码。它们通常只提供了用于访问它们属性的简单的getter和setter。代码如下：1data class Human(val name: String, va">
+  <meta name="description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。  数据类基本写法它可以让你避免创建Java中的用于保存状态但又操作非常简单的POJO的模版代码。它们通常只提供了用于访问它们属性的简单的getter和setter。代码如下：1data class Human(val name: String, va">
+<meta name="keywords" content="kotlin,android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kotlin学习笔记(二)">
 <meta property="og:url" content="https://martinbzdqsm.github.io/2017/02/06/Kotlin学习笔记(二)/index.html">
-<meta property="og:site_name" content="Martin's Blog">
-<meta property="og:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。
-
-数据类基本写法它可以让你避免创建Java中的用于保存状态但又操作非常简单的POJO的模版代码。它们通常只提供了用于访问它们属性的简单的getter和setter。代码如下：1data class Human(val name: String, va">
+<meta property="og:site_name" content="Martin&#39;s Blog">
+<meta property="og:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。  数据类基本写法它可以让你避免创建Java中的用于保存状态但又操作非常简单的POJO的模版代码。它们通常只提供了用于访问它们属性的简单的getter和setter。代码如下：1data class Human(val name: String, va">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png">
 <meta property="og:updated_time" content="2017-02-06T08:44:51.743Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kotlin学习笔记(二)">
-<meta name="twitter:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。
-
-数据类基本写法它可以让你避免创建Java中的用于保存状态但又操作非常简单的POJO的模版代码。它们通常只提供了用于访问它们属性的简单的getter和setter。代码如下：1data class Human(val name: String, va">
+<meta name="twitter:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。  数据类基本写法它可以让你避免创建Java中的用于保存状态但又操作非常简单的POJO的模版代码。它们通常只提供了用于访问它们属性的简单的getter和setter。代码如下：1data class Human(val name: String, va">
 <meta name="twitter:image" content="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png">
   
     <link rel="alternate" href="/atom.xml" title="Martin&#39;s Blog" type="application/atom+xml">
@@ -116,7 +112,7 @@
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" rel="gallery_ciyy6vvvk0009isrjl8bbhsid">
+      <a class="article-gallery-img fancybox" href="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" rel="gallery_cj6riz4sz0000owz315qmijev">
         <img src="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" itemprop="image">
       </a>
     
@@ -162,7 +158,7 @@
 <p>例如：简单的复制一个类并修改:<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> human= Human(<span class="string">"Marin"</span>,<span class="number">1</span>,<span class="string">"china"</span>)</div><div class="line"><span class="keyword">val</span> human2=human.copy(name =<span class="string">"Martin2"</span>)</div></pre></td></tr></table></figure></p>
 <h3 id="映射对象到变量中"><a href="#映射对象到变量中" class="headerlink" title="映射对象到变量中"></a>映射对象到变量中</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> (name, sex, country) = human</div></pre></td></tr></table></figure>
 <p>相当于：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> name = human.component1()</div><div class="line"><span class="keyword">val</span> sex = human.component2()</div><div class="line"><span class="keyword">val</span> country = human.component3()</div></pre></td></tr></table></figure></p>
-<p>而这些变量系统会自动生成,这个特性背后的逻辑是非常强大的，它可以在很多情况下帮助我们简化代码。例如：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> ((key, value) <span class="keyword">in</span> map) &#123;</div><div class="line">    Log.d(<span class="string">"map"</span>, <span class="string">"key:<span class="subst">$key</span>, value:<span class="subst">$value</span>"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而这些变量系统会自动生成,这个特性背后的逻辑是非常强大的，它可以在很多情况下帮助我们简化代码。例如：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> ((key, value) <span class="keyword">in</span> map) &#123;</div><div class="line">    Log.d(<span class="string">"map"</span>, <span class="string">"key:<span class="variable">$key</span>, value:<span class="variable">$value</span>"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><blockquote>
 <p>Kotin有一些固定数量象征性的操作符，我们可以在任何类中很容易地使用它们。方法是创建一个方法，方法名为保留的操作符关键字，这样就可以让这个操作符的行为映射到这个方法。重载这些操作符可以增加代码可读性和简洁性。</p>
 </blockquote>
@@ -380,6 +376,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2017/02/15/android线程间的通行方式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          android线程间的通信方式
+        
+      </div>
+    </a>
   
   
     <a href="/2017/02/04/Kotlin学习笔记(一)/" id="article-nav-older" class="article-nav-link-wrap">

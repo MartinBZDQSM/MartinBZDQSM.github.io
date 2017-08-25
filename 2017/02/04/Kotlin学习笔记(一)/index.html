@@ -11,32 +11,19 @@
   
   
   
-  <meta name="description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。
-
-环境配置：插件安装打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。
-
-Gradle配置修改父build.gradle：
-其中kotlin版">
+  <meta name="description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。  环境配置：插件安装打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。  Gradle配置修改父build.gradle： 其中kotlin版">
+<meta name="keywords" content="kotlin,android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kotlin学习笔记(一)">
 <meta property="og:url" content="https://martinbzdqsm.github.io/2017/02/04/Kotlin学习笔记(一)/index.html">
-<meta property="og:site_name" content="Martin's Blog">
-<meta property="og:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。
-
-环境配置：插件安装打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。
-
-Gradle配置修改父build.gradle：
-其中kotlin版">
+<meta property="og:site_name" content="Martin&#39;s Blog">
+<meta property="og:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。  环境配置：插件安装打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。  Gradle配置修改父build.gradle： 其中kotlin版">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png">
-<meta property="og:updated_time" content="2017-02-06T06:04:24.180Z">
+<meta property="og:updated_time" content="2017-02-06T06:04:24.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kotlin学习笔记(一)">
-<meta name="twitter:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。
-
-环境配置：插件安装打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。
-
-Gradle配置修改父build.gradle：
-其中kotlin版">
+<meta name="twitter:description" content="本文只是作者学习笔记，如果想学习kotlin的朋友建议去看Kotlin for android developers,这里大部分都是摘抄自这本书。  环境配置：插件安装打开studio插件界面，查找kotliin并安装下图中的两个插件。其中Kotlin Android Extensions的作用相当于Butterknife。  Gradle配置修改父build.gradle： 其中kotlin版">
 <meta name="twitter:image" content="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png">
   
     <link rel="alternate" href="/atom.xml" title="Martin&#39;s Blog" type="application/atom+xml">
@@ -125,7 +112,7 @@ Gradle配置修改父build.gradle：
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" rel="gallery_ciyy6vvsk0000isrj2y4f2w4y">
+      <a class="article-gallery-img fancybox" href="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" rel="gallery_cj6riz4tt0002owz34sw4fia1">
         <img src="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" itemprop="image">
       </a>
     
@@ -185,7 +172,7 @@ Gradle配置修改父build.gradle：
 </ul>
 <h2 id="类与函数："><a href="#类与函数：" class="headerlink" title="类与函数："></a>类与函数：</h2><h3 id="类继承和构造方法"><a href="#类继承和构造方法" class="headerlink" title="类继承和构造方法:"></a>类继承和构造方法:</h3><p>默认任何类都是基础继承自Any（类似object），所有类默认都是不可继承的即final，只能继承<strong>open</strong>或者<strong>abstract</strong>的类。</p>
 <p> 类有一个默认唯一的的构造器 init，其参数在<strong>类名</strong>后面添加即可：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">open</span> <span class="class"><span class="keyword">class</span> <span class="title">Father</span></span>(name: String, surname: String) &#123;</div><div class="line">    init &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span></span>(name: String, surname: String) : Father(name, surname) &#123;</div><div class="line">    init &#123;</div><div class="line">        name?.toString() <span class="comment">//这里拿得到构造参数</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="类的属性"><a href="#类的属性" class="headerlink" title="类的属性"></a>类的属性</h3><p>自定类会默认使用getter和setter，你也可以使用field这个预留字段来进行访问：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: String = <span class="string">""</span></div><div class="line">        <span class="keyword">get</span>() = field.toUpperCase()<span class="comment">//toUpperCase使字符全部大写</span></div><div class="line">        <span class="keyword">set</span>(value) &#123;</div><div class="line">            field = <span class="string">"Name: <span class="subst">$value</span>"</span></div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> customer: Person = Person()</div><div class="line">    println(customer.name)   <span class="comment">// ABC</span></div><div class="line">    customer.name = <span class="string">"aaa"</span></div><div class="line">    println(customer.name)   <span class="comment">//NAME: AAA</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="类的属性"><a href="#类的属性" class="headerlink" title="类的属性"></a>类的属性</h3><p>自定类会默认使用getter和setter，你也可以使用field这个预留字段来进行访问：<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: String = <span class="string">""</span></div><div class="line">        <span class="keyword">get</span>() = field.toUpperCase()<span class="comment">//toUpperCase使字符全部大写</span></div><div class="line">        <span class="keyword">set</span>(value) &#123;</div><div class="line">            field = <span class="string">"Name: <span class="variable">$value</span>"</span></div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> customer: Person = Person()</div><div class="line">    println(customer.name)   <span class="comment">// ABC</span></div><div class="line">    customer.name = <span class="string">"aaa"</span></div><div class="line">    println(customer.name)   <span class="comment">//NAME: AAA</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>点击查看field的属性时会发现显示如下图：</p>
 <p><img src="http://ojoa8hgnl.bkt.clouddn.com/kotlin1.png" alt="问题"></p>
 <p>咦！！既然是final var <strong>name</strong>！！final var那不等同于val？还能这样赋值！<br>那不等同于下面这段代码么？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">int</span> b = <span class="number">9</span>;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> a = b;</div><div class="line">    b = <span class="number">10</span>;</div><div class="line">`</div></pre></td></tr></table></figure></p>

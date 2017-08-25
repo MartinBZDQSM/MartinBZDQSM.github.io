@@ -3,28 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>图像转svg | Martin&#39;s Blog</title>
+  <title>android线程间的通信方式 | Martin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="psadobe" />
+  <meta name="keywords" content="androidjava" />
   
   
   
   
-  <meta name="description" content="工具：Adobe Illustrator  流程之前了解到的勾勒svg路径的工具可能用的比较多的都是GIMP 2,当我问到我司的美工大大的时候，他介绍我Adobe Illustrator 这个流弊哄哄的工具。使用起来超级简单：1.在AI中打开需要处理的图片（下方图只是演示，并不是叫你使用处理过的图，你随意就好了。），然后点击上方的图像临摹按钮：2.调节右方属性中的阈值，调节到你想用的效果 然后点击">
-<meta name="keywords" content="ps,adobe">
+  <meta name="description" content="今天去面试，面试官问了这样一个问题：“android中线程之间的通信方式有哪些？”，自己迷迷糊糊的回答了几种但回答的都不全面，于是回来马上搜集资料整理一下。  Handler这个我想是做android估计都知道，关于handler的通信机制跟着源码走一圈我想都能分析个所以然来，所以这里不再做记录了。我跟着标题搜索了一下，发现答案基本都差不多，不过都没有离开android这个范围，无非是Async">
+<meta name="keywords" content="android,java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图像转Svg">
-<meta property="og:url" content="https://martinbzdqsm.github.io/2017/01/15/图像转svg/index.html">
+<meta property="og:title" content="android线程间的通信方式">
+<meta property="og:url" content="https://martinbzdqsm.github.io/2017/02/15/android线程间的通行方式/index.html">
 <meta property="og:site_name" content="Martin&#39;s Blog">
-<meta property="og:description" content="工具：Adobe Illustrator  流程之前了解到的勾勒svg路径的工具可能用的比较多的都是GIMP 2,当我问到我司的美工大大的时候，他介绍我Adobe Illustrator 这个流弊哄哄的工具。使用起来超级简单：1.在AI中打开需要处理的图片（下方图只是演示，并不是叫你使用处理过的图，你随意就好了。），然后点击上方的图像临摹按钮：2.调节右方属性中的阈值，调节到你想用的效果 然后点击">
+<meta property="og:description" content="今天去面试，面试官问了这样一个问题：“android中线程之间的通信方式有哪些？”，自己迷迷糊糊的回答了几种但回答的都不全面，于是回来马上搜集资料整理一下。  Handler这个我想是做android估计都知道，关于handler的通信机制跟着源码走一圈我想都能分析个所以然来，所以这里不再做记录了。我跟着标题搜索了一下，发现答案基本都差不多，不过都没有离开android这个范围，无非是Async">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ojoa8hgnl.bkt.clouddn.com/ps_转svg.png">
-<meta property="og:updated_time" content="2017-01-16T12:54:00.885Z">
+<meta property="og:image" content="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png">
+<meta property="og:updated_time" content="2017-02-15T10:36:47.333Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图像转Svg">
-<meta name="twitter:description" content="工具：Adobe Illustrator  流程之前了解到的勾勒svg路径的工具可能用的比较多的都是GIMP 2,当我问到我司的美工大大的时候，他介绍我Adobe Illustrator 这个流弊哄哄的工具。使用起来超级简单：1.在AI中打开需要处理的图片（下方图只是演示，并不是叫你使用处理过的图，你随意就好了。），然后点击上方的图像临摹按钮：2.调节右方属性中的阈值，调节到你想用的效果 然后点击">
-<meta name="twitter:image" content="http://ojoa8hgnl.bkt.clouddn.com/ps_转svg.png">
+<meta name="twitter:title" content="android线程间的通信方式">
+<meta name="twitter:description" content="今天去面试，面试官问了这样一个问题：“android中线程之间的通信方式有哪些？”，自己迷迷糊糊的回答了几种但回答的都不全面，于是回来马上搜集资料整理一下。  Handler这个我想是做android估计都知道，关于handler的通信机制跟着源码走一圈我想都能分析个所以然来，所以这里不再做记录了。我跟着标题搜索了一下，发现答案基本都差不多，不过都没有离开android这个范围，无非是Async">
+<meta name="twitter:image" content="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png">
   
     <link rel="alternate" href="/atom.xml" title="Martin&#39;s Blog" type="application/atom+xml">
   
@@ -106,14 +106,14 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-图像转svg" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-android线程间的通行方式" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="http://ojoa8hgnl.bkt.clouddn.com/ps_转svg.png" rel="gallery_cj6riz4vs000fowz3g4hx6pnk">
-        <img src="http://ojoa8hgnl.bkt.clouddn.com/ps_转svg.png" itemprop="image">
+      <a class="article-gallery-img fancybox" href="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" rel="gallery_cj6riz4uf0008owz3ovv4ht6l">
+        <img src="http://ojoa8hgnl.bkt.clouddn.com/kotlin.png" itemprop="image">
       </a>
     
   </div>
@@ -124,7 +124,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      图像转Svg
+      android线程间的通信方式
     </h1>
   
 
@@ -132,35 +132,36 @@
     
     <div class="article-meta">
       
-	Posted on <a href="/2017/01/15/图像转svg/" class="article-date">
-	  <time datetime="2017-01-15T15:33:57.000Z" itemprop="datePublished">一月 15, 2017</time>
+	Posted on <a href="/2017/02/15/android线程间的通行方式/" class="article-date">
+	  <time datetime="2017-02-15T10:09:01.000Z" itemprop="datePublished">二月 15, 2017</time>
 	</a>
 
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h3><p>Adobe Illustrator </p>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>之前了解到的勾勒svg路径的工具可能用的比较多的都是GIMP 2,当我问到我司的美工大大的时候，他介绍我Adobe Illustrator 这个流弊哄哄的工具。使用起来超级简单：<br><strong>1.在AI中打开需要处理的图片（下方图只是演示，并不是叫你使用处理过的图，你随意就好了。），然后点击上方的图像临摹按钮：</strong><br><img src="http://upload-images.jianshu.io/upload_images/2510337-b69a631269a89e96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br><strong>2.调节右方属性中的阈值，调节到你想用的效果</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2510337-e21a4b07837c8804.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br><strong>然后点击上方的扩展按钮，并保存成svg，=</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2510337-8d2a482c8046b64c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br><a id="more"></a></p>
-
+        <blockquote>
+<p>今天去面试，面试官问了这样一个问题：“android中线程之间的通信方式有哪些？”，自己迷迷糊糊的回答了几种但回答的都不全面，于是回来马上搜集资料整理一下。</p>
+</blockquote>
+<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><p>这个我想是做android估计都知道，关于handler的通信机制跟着源码走一圈我想都能分析个所以然来，所以这里不再做记录了。<br>我跟着标题搜索了一下，发现答案基本都差不多，不过都没有离开android这个范围，无非是AsyncTask，HandlerThread，和View.postDelay(Runnable , long)，runOnUiThread（(Runnable)  但是跟着源码走一遭发现<strong>无非还是android特有的Handler通信机制</strong>。<br>例如runOnUiThread：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">    * Runs the specified action on the UI thread. If the current thread is the UI</span></div><div class="line"><span class="comment">    * thread, then the action is executed immediately. If the current thread is</span></div><div class="line"><span class="comment">    * not the UI thread, the action is posted to the event queue of the UI thread.</span></div><div class="line"><span class="comment">    *</span></div><div class="line"><span class="comment">    * <span class="doctag">@param</span> action the action to run on the UI thread</span></div><div class="line"><span class="comment">    */</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">runOnUiThread</span><span class="params">(Runnable action)</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (Thread.currentThread() != mUiThread) &#123;</div><div class="line">           mHandler.post(action);</div><div class="line">       &#125; <span class="keyword">else</span> &#123;</div><div class="line">           action.run();</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>但是这个答案并非局限于android而且也并非局限UI线程，于是乎我查了查java线程通信补补知识。</p>
+<h2 id="synchronized共享内存"><a href="#synchronized共享内存" class="headerlink" title="synchronized共享内存"></a>synchronized共享内存</h2><h2 id="while轮询的方式"><a href="#while轮询的方式" class="headerlink" title="while轮询的方式"></a>while轮询的方式</h2><h2 id="wait-notify机制"><a href="#wait-notify机制" class="headerlink" title="wait/notify机制"></a>wait/notify机制</h2><h2 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h2>
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/杂七杂八/">杂七杂八</a>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adobe/">adobe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ps/">ps</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
       
         
 	<div id="comment">
 	
 	<!-- 多说评论框 start -->
-	 <div class="ds-thread" data-thread-key="/2017/01/15/图像转svg/" data-title="图像转Svg" data-url="https://martinbzdqsm.github.io/2017/01/15/图像转svg/"></div>
+	 <div class="ds-thread" data-thread-key="/2017/02/15/android线程间的通行方式/" data-title="android线程间的通信方式" data-url="https://martinbzdqsm.github.io/2017/02/15/android线程间的通行方式/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -187,15 +188,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/01/16/图片线条化/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          图片线条化
-        
-      </div>
-    </a>
   
+    <a href="/2017/02/06/Kotlin学习笔记(二)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Kotlin学习笔记(二)</div>
+    </a>
   
 </nav>
 
@@ -208,7 +205,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#工具："><span class="nav-number">1.</span> <span class="nav-text">工具：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">2.</span> <span class="nav-text">流程</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler"><span class="nav-number">1.</span> <span class="nav-text">Handler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized共享内存"><span class="nav-number">2.</span> <span class="nav-text">synchronized共享内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#while轮询的方式"><span class="nav-number">3.</span> <span class="nav-text">while轮询的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wait-notify机制"><span class="nav-number">4.</span> <span class="nav-text">wait/notify机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道通信"><span class="nav-number">5.</span> <span class="nav-text">管道通信</span></a></li></ol>
     
     </div>
   </aside>
